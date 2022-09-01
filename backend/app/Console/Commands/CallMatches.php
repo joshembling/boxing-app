@@ -75,8 +75,8 @@ class CallMatches extends Command
 
             // HEADSHOTS
             $headshots = $fightCard->filter('.fight-card__fighters .fight-card__photo')->each(function ($headshot) {
-                if ($headshot->filter('a > img')->count() > 0) {
-                    return $headshot->filter('a > img')->attr('data-src');
+                if ($headshot->filter('img')->count() > 0) {
+                    return $headshot->filter('img')->attr('data-src');
                 }
             });
 

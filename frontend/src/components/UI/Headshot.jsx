@@ -5,9 +5,7 @@ const Headshot = ({ boxerName, boxerHeadshot }) => {
         <picture className="headshot">
             <img
                 src={
-                    boxerHeadshot
-                        ? boxerHeadshot
-                        : 'https://simg.nicepng.com/png/small/177-1770682_boxer-silhouette-png-wwwpixsharkcom-images-galleries-boxing-silhouette.png'
+                    boxerHeadshot ? boxerHeadshot : '/images/blank-fighter.png'
                 }
                 alt={`Image of ${boxerName}`}
                 referrerPolicy="no-referrer"

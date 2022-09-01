@@ -37,7 +37,7 @@ const Card = ({
             </div>
 
             <div className="match-info">
-                <div>
+                <div className="match-info__details">
                     <div className="match-info__title">
                         <h3>{matchTitle}</h3>
                         <strong>{weightClass}</strong>
@@ -57,6 +57,7 @@ const Card = ({
                         {tvImg &&
                             tvImg.map((img, idx) => (
                                 <img
+                                    key={idx}
                                     src={img}
                                     rel="no-referrer"
                                     referrerPolicy="no-referrer"

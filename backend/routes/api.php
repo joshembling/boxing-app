@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\BoxingMatchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BoxingMatchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-//     return $request->user();
+// 	return $request->user();
 // });
+
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+	// Route::get('/', [BoxingMatchController::class, 'index']);
+	// Route::get('/matches/{slug}', [BoxingMatchController::class, 'show']);
+});
 
 Route::get('/', [BoxingMatchController::class, 'index']);
 Route::get('/matches/{slug}', [BoxingMatchController::class, 'show']);

@@ -1,0 +1,46 @@
+@import 'vars';
+
+nav {
+    background: rgba(#9f193b, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    margin-bottom: 2rem;
+
+    ul {
+        margin: 0;
+        padding: 1rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+        text-align: center;
+
+        @media (max-width: 1024px) {
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        li {
+            padding: 0;
+            margin: 0;
+            a {
+                color: #fff;
+                text-decoration: none;
+                font-weight: 600;
+                transition: $transition;
+                text-align: center;
+
+                &:hover {
+                    opacity: 0.7;
+                    transition: $transition;
+                }
+            }
+
+            @media (max-width: 360px) {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}

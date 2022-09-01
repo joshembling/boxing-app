@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react'
 
-const useLocalStorage = (storageKey, fallbackState) => {
-    // modified due to NEXT JS SSR
-    const [value, setValue] = useState(
-        typeof window !== 'undefined'
-            ? JSON.parse(localStorage.getItem(storageKey)) ?? fallbackState
-            : '',
-    )
+const useLocalStorage = (key, initialValue) => {
+    const [value, setValue] = useState(() => {
+        if (typeof localStorage !== 'undefined') {
+            const jsonValue = localStorage.getItem(key)
+            if (jsonValue != null) return JSON.parse(jsonValue)
+        }
+
+        if (typeof initialValue === 'function') {
+            return initialValue()
+        } else {
+            return initialValue
+        }
+    })
 
     useEffect(() => {
-        localStorage.setItem(storageKey, JSON.stringify(value))
-    }, [value, storageKey])
+        localStorage.setItem(key, JSON.stringify(value))
+    }, [key, value])
 
     return [value, setValue]
 }

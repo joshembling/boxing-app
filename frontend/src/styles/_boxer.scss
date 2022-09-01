@@ -1,0 +1,95 @@
+@import 'vars';
+
+.boxer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    z-index: 10;
+
+    @media (max-width: 768px) {
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__info {
+        background-image: linear-gradient(
+            to bottom,
+            rgba(#ff0844, 0.7) 0%,
+            rgba(#9f193b, 0.75) 100%
+        );
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            height: 6rem;
+            justify-content: space-between;
+        }
+    }
+
+    &__name {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem 0.75rem;
+
+        img {
+            height: 1rem;
+        }
+
+        span:last-of-type {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column !important;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem 1.5rem;
+        }
+        @media (max-width: 575px) {
+            padding: 0.35rem 1rem;
+
+            span:first-of-type {
+                display: none;
+            }
+            span:last-of-type {
+                display: block;
+            }
+        }
+    }
+
+    h3 {
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        color: #fff;
+        span {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    &__flag {
+        width: 2rem;
+    }
+
+    &__record {
+        color: #fff;
+        // padding: 0.35rem 0.5rem 0.35rem 0.5rem;
+        padding: 0.75rem;
+
+        @media (max-width: 768px) {
+            padding: 0.5rem 1.5rem;
+            text-align: center;
+        }
+        @media (max-width: 575px) {
+            padding: 0.35rem 1rem;
+        }
+    }
+}
