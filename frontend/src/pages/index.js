@@ -1,14 +1,10 @@
 import { server } from '../../config/index'
 
-import Head from 'next/head'
-import Link from 'next/link'
-
 import Boxer from 'components/UI/Boxer'
 import Card from 'components/UI/Card'
 import Spinner from 'components/UI/Spinner'
 
 import { useState, useEffect } from 'react'
-import { get } from 'colornames'
 
 export default function Home() {
     const [matches, setMatches] = useState([])
