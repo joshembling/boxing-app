@@ -33,6 +33,9 @@ export default function Home() {
             })
     }, [])
 
+    console.log(url)
+    console.log(server)
+
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
     return (
