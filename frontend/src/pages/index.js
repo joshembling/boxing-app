@@ -20,6 +20,12 @@ export default function Home() {
             //     Accept: 'application/json',
             //     'X-Authorization': `Bearer: 1|JByfZdGxU6hztrsvlYI6dPhrM6TPUsV3DUmvJOO0`,
             // },
+            method: 'GET',
+            body: JSON.stringify(data),
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         })
             .then(response => response.json())
             .then(data => {
