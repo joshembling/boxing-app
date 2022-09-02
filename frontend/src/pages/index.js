@@ -10,7 +10,8 @@ export default function Home() {
     const [matches, setMatches] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const url = `${server}/api/`
+    // const url = `${server}/api/`
+    const url = `https://boxing.joshembling.co.uk/api/`
 
     useEffect(() => {
         setLoading(true)
@@ -21,7 +22,7 @@ export default function Home() {
             //     'X-Authorization': `Bearer: 1|JByfZdGxU6hztrsvlYI6dPhrM6TPUsV3DUmvJOO0`,
             // },
             method: 'GET',
-            body: JSON.stringify(data),
+            // body: JSON.stringify(data),
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
