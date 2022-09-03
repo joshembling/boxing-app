@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer>
             <div className="wrap__lg">
-                Copyright &copy; {new Date().getFullYear()} Josh Embling
+                Copyright &copy; {new Date().getFullYear()} Boxing Scorecard
             </div>{' '}
         </footer>
     )

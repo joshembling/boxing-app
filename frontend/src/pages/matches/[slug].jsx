@@ -88,8 +88,6 @@ const Match = ({ match }) => {
         }))
     }, [roundTotal])
 
-    console.log(totals)
-
     return (
         <>
             <Head>

@@ -13,8 +13,6 @@ const matches = () => {
     useEffect(() => {
         const savedMatches = { ...localStorage }
 
-        console.log(savedMatches)
-
         if (savedMatches) {
             Object.keys(savedMatches).forEach(match => {
                 // console.log(match.startsWith('match'))
@@ -49,7 +47,6 @@ const matches = () => {
                 "WARNING: Are you sure you want to delete all of your data? You can't undo this action - it is permanent...",
             )
         ) {
-            console.log('clear')
             localStorage.clear()
             Router.push('/')
         }
