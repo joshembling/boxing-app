@@ -29,7 +29,7 @@ const matches = () => {
             })
         }
 
-        Object.keys(savedMatches).length === 0 && Router.push('/')
+        // Object.keys(savedMatches).length === 0 && Router.push('/')
     }, [])
 
     // add to new object to loop over in return
