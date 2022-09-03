@@ -1,5 +1,5 @@
 import { server } from '../../../config/index'
-
+import Head from 'next/head'
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import Link from 'next/link'
 import useLocalStorage from '@/hooks/useLocalStorage'
@@ -92,6 +92,9 @@ const Match = ({ match }) => {
 
     return (
         <>
+            <Head>
+                <title>{match.match_title} | Boxing Scorecard</title>
+            </Head>
             <div className="wrap__lg">
                 <h2>{match.match_title}</h2>
                 <table>

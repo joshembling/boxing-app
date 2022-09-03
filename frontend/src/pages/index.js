@@ -1,4 +1,5 @@
 import { server } from '../../config/index'
+import Head from 'next/head'
 
 import Boxer from 'components/UI/Boxer'
 import Card from 'components/UI/Card'
@@ -40,6 +41,9 @@ export default function Home() {
     yesterday.setDate(yesterday.getDate() - 1)
     return (
         <>
+            <Head>
+                <title>Home | Boxing Scorecard</title>
+            </Head>
             <div className="wrap__lg">
                 <div className="intro">
                     <h1>BOXING SCORECARD</h1>
