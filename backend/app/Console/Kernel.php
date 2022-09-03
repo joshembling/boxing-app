@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('call:matches')->dailyAt('20:04');
+        $schedule->command('call:matches')->dailyAt('19:15')->sendOutputTo('./storage/logs/schedule');
     }
 
     /**
