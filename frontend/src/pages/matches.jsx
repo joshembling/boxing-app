@@ -16,7 +16,7 @@ const matches = () => {
         console.log(savedMatches)
 
         if (savedMatches) {
-            Object.keys(savedMatches).map(match => {
+            Object.keys(savedMatches).forEach(match => {
                 console.log('first')
                 console.log(match)
                 console.log(match.startsWith('match'))
@@ -26,16 +26,19 @@ const matches = () => {
                     // if (match.startsWith('match')) {
                     console.log('second')
                     setMatches(prev => [...prev, match])
-                }
-                console.log('third')
-                console.log(JSON.parse(savedMatches[match]))
-                // check nothing else interferes with local storage keys
-                if (Object.keys(JSON.parse(savedMatches[match]))[0] === 'b1') {
-                    console.log('fourth')
-                    setMatchObject(prev => [
-                        ...prev,
-                        JSON.parse(savedMatches[match]),
-                    ])
+
+                    console.log(savedMatches[match])
+                    console.log(JSON.parse(savedMatches[match]))
+                    // check nothing else interferes with local storage keys
+                    if (
+                        Object.keys(JSON.parse(savedMatches[match]))[0] === 'b1'
+                    ) {
+                        console.log('fourth')
+                        setMatchObject(prev => [
+                            ...prev,
+                            JSON.parse(savedMatches[match]),
+                        ])
+                    }
                 }
             })
         }
