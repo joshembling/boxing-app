@@ -8,6 +8,10 @@
 
     @media (max-width: 768px) {
         padding: 0;
+
+        .btn {
+            margin: 0;
+        }
     }
 
     &__grid {
@@ -27,6 +31,10 @@
             text-align: center;
         }
 
+        .boxer__name {
+            justify-content: flex-end;
+        }
+
         picture {
             justify-content: flex-end;
             align-items: flex-end;
@@ -36,9 +44,9 @@
 
     .title {
         position: absolute;
-        top: 50%;
+        top: 0%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, 0%);
         width: 50%;
         font-size: 4rem;
         text-transform: uppercase;

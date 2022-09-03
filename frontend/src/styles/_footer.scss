@@ -1,7 +1,14 @@
+@import 'vars';
+
 footer {
-    padding: 2rem;
+    background: $red;
+    color: #fff;
+    padding: 1.5rem;
     text-align: center;
     margin-top: 3rem;
     font-weight: 500;
     font-size: 1rem;
+    // position: absolute;
+    // bottom: 0;
+    width: 100%;
 }

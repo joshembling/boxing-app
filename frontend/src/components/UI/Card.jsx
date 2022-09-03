@@ -23,11 +23,22 @@ const Card = ({
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
 
-    // if (getMatchDate.setHours(0, 0, 0, 0) > yesterday.setHours(0, 0, 0, 0)) {
-    //     console.log(getMatchDate)
-    // } else {
-    //     console.log('expired')
+    // if (getMatchDate.setHours(0, 0, 0, 0) > tomorrow.setHours(0, 0, 0, 0)) {
+    //     const oneDay = 24 * 60 * 60 * 1000
+    //     const diffDays = Math.round(
+    //         Math.abs((getMatchDate - tomorrow) / oneDay),
+    //     )
     // }
+
+    function countdown(matchDate, tomorrow) {
+        // if (matchDate.setHours(0, 0, 0, 0) > tomorrow.setHours(0, 0, 0, 0)) {
+        const oneDay = 24 * 60 * 60 * 1000
+        const diffDays = Math.round(
+            Math.abs((getMatchDate - tomorrow) / oneDay),
+        )
+
+        return diffDays === 1 ? '1 day to go...' : diffDays + ' days to go...'
+    }
 
     return (
         <div key={matchId} className="card">
@@ -78,12 +89,18 @@ const Card = ({
 
             <Button
                 link={`/matches/${slug}`}
-                // isDisabled={
-                //     getMatchDate.setHours(0, 0, 0, 0) >=
-                //     tomorrow.setHours(0, 0, 0, 0)
-                //         ? true
-                //         : false
-                // }
+                isDisabled={
+                    getMatchDate.setHours(0, 0, 0, 0) >=
+                    tomorrow.setHours(0, 0, 0, 0)
+                        ? true
+                        : false
+                }
+                text={
+                    getMatchDate.setHours(0, 0, 0, 0) >=
+                    tomorrow.setHours(0, 0, 0, 0)
+                        ? countdown(getMatchDate, tomorrow)
+                        : 'Start Scoring'
+                }
             />
         </div>
     )

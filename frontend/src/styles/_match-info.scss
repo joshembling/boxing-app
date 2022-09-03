@@ -6,7 +6,7 @@
     background-image: linear-gradient(104deg, #111 10%, #0c1330 100%);
     padding: 1rem;
     color: #fff;
-    margin: 1.75rem 0 0;
+    // margin: 1.75rem 0 0;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -15,10 +15,11 @@
         align-items: center;
         gap: 1rem;
         margin: 0;
+        padding: 2rem 0.5rem 1rem;
     }
-    @media (max-width: 575px) {
-        padding: 1rem 0.5rem;
-    }
+    // @media (max-width: 575px) {
+    //     padding: 2rem 0.5rem;
+    // }
 
     &__title {
         margin-bottom: 1rem;
