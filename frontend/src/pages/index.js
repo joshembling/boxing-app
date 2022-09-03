@@ -11,7 +11,8 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
 
     // const url = `${server}/api/`
-    const url = `https://boxing.joshembling.co.uk/api/`
+    const url = `https://boxing.joshembling.co.uk/api`
+    // const url = `http://localhost:8000/api/`
 
     useEffect(() => {
         setLoading(true)
@@ -39,9 +40,6 @@ export default function Home() {
                 setLoading(false)
             })
     }, [])
-
-    console.log(url)
-    console.log(server)
 
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)

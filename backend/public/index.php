@@ -5,6 +5,24 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// $origins = [
+//     'https://boxing.joshembling.co.uk',
+//     'http://localhost:3000'
+// ];
+
+// if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] !== '') {
+//     foreach ($origins as $o) {
+//         if (preg_match('#' . $o . '#', $_SERVER['HTTP_ORIGIN'])) {
+//             header('Access-Conrol-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+//             header('Access-Conrol-Allow-Credentials: true');
+//             header('Access-Conrol-Allow-Methods: GET, POST, PUT, DELETE');
+//             header('Access-Control-Max-Age: 1728000');
+//             header('Access-Control-Max-Headers: Accept, Content-Type, X-Auth-Token, Authorization, Origin, X-Auth-Token, X-Requested-With, Content-Range, Content-Disposition, Content-Description, x-xsrf-token, ip');
+//             break;
+//         }
+//     }
+// }
+
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
@@ -16,7 +34,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -31,7 +49,7 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +62,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
