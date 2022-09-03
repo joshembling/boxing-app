@@ -16,7 +16,11 @@ const matches = () => {
         if (savedMatches) {
             Object.keys(savedMatches).map(match => {
                 console.log('first')
-                if (match.startsWith('match')) {
+                console.log(match.startsWith('match'))
+                console.log(match.substring(0, 5) == 'match')
+                // try this for windows error
+                if (match.substring(0, 5) == 'match') {
+                    // if (match.startsWith('match')) {
                     console.log('second')
                     setMatches(prev => [...prev, match])
                 }
