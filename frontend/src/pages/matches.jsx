@@ -15,12 +15,16 @@ const matches = () => {
 
         if (savedMatches) {
             Object.keys(savedMatches).map(match => {
+                console.log('first')
                 if (match.startsWith('match')) {
+                    console.log('second')
                     setMatches(prev => [...prev, match])
                 }
-
+                console.log('third')
+                console.log(JSON.parse(savedMatches[match]))
                 // check nothing else interferes with local storage keys
                 if (Object.keys(JSON.parse(savedMatches[match]))[0] === 'b1') {
+                    console.log('fourth')
                     setMatchObject(prev => [
                         ...prev,
                         JSON.parse(savedMatches[match]),
