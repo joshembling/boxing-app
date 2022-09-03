@@ -17,23 +17,13 @@ const matches = () => {
 
         if (savedMatches) {
             Object.keys(savedMatches).forEach(match => {
-                console.log('first')
-                console.log(match)
-                console.log(match.startsWith('match'))
-                console.log(match.substring(0, 5) == 'match')
-                // try this for windows error
+                // console.log(match.startsWith('match'))
                 if (match.substring(0, 5) == 'match') {
-                    // if (match.startsWith('match')) {
-                    console.log('second')
                     setMatches(prev => [...prev, match])
-
-                    console.log(savedMatches[match])
-                    console.log(JSON.parse(savedMatches[match]))
                     // check nothing else interferes with local storage keys
                     if (
                         Object.keys(JSON.parse(savedMatches[match]))[0] === 'b1'
                     ) {
-                        console.log('fourth')
                         setMatchObject(prev => [
                             ...prev,
                             JSON.parse(savedMatches[match]),
