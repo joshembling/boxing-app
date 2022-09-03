@@ -13,9 +13,12 @@ const matches = () => {
     useEffect(() => {
         const savedMatches = { ...localStorage }
 
+        console.log(savedMatches)
+
         if (savedMatches) {
             Object.keys(savedMatches).map(match => {
                 console.log('first')
+                console.log(match)
                 console.log(match.startsWith('match'))
                 console.log(match.substring(0, 5) == 'match')
                 // try this for windows error
