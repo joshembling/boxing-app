@@ -9,6 +9,7 @@ const Headshot = ({ boxerName, boxerHeadshot }) => {
                 }
                 alt={`Image of ${boxerName}`}
                 referrerPolicy="no-referrer"
+                rel="no-referrer"
             />
         </picture>
     )

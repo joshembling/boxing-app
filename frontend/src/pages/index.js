@@ -37,13 +37,11 @@ export default function Home() {
             })
     }, [])
 
-    console.log(
-        matches.sort(function (a, b) {
-            var c = new Date(a.time)
-            var d = new Date(b.time)
-            return c - d
-        }),
-    )
+    matches.sort(function (a, b) {
+        var c = new Date(a.time)
+        var d = new Date(b.time)
+        return c - d
+    })
 
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
