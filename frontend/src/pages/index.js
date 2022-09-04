@@ -106,9 +106,11 @@ export default function Home() {
                                                     match.boxer_1_record
                                                 }
                                                 boxerHeadshot={
+                                                    server +
                                                     match.boxer_1_headshot
                                                 }
                                                 boxerFlag={
+                                                    server +
                                                     match.boxer_1_flag_img
                                                 }
                                                 boxerFlagAlt={
@@ -124,9 +126,11 @@ export default function Home() {
                                                     match.boxer_2_record
                                                 }
                                                 boxerHeadshot={
+                                                    server +
                                                     match.boxer_2_headshot
                                                 }
                                                 boxerFlag={
+                                                    server +
                                                     match.boxer_2_flag_img
                                                 }
                                                 boxerFlagAlt={
