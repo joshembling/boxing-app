@@ -34,13 +34,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::get('/', [BoxingMatchController::class, 'index']);
-Route::get('/test', function () {
-	// $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
-	$url = 'https://box.live/wp-content/themes/BoxLive%20Theme/assets/images/flags/us.svg';
-	$name = substr($url, strrpos($url, '/') + 1);
-	echo '<pre>';
-	var_dump($name);
-	var_dump(str_contains(Storage::url('public/flags/' . 'us' . '.svg'), $name));
-	echo '</pre>';
-});
 Route::get('/matches/{slug}', [BoxingMatchController::class, 'show']);

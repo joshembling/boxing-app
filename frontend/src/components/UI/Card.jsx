@@ -33,9 +33,8 @@ const Card = ({
     function countdown(matchDate, tomorrow) {
         // if (matchDate.setHours(0, 0, 0, 0) > tomorrow.setHours(0, 0, 0, 0)) {
         const oneDay = 24 * 60 * 60 * 1000
-        const diffDays = Math.round(
-            Math.abs((getMatchDate - tomorrow) / oneDay),
-        )
+        const diffDays =
+            Math.round(Math.abs((getMatchDate - tomorrow) / oneDay)) + 1
 
         return diffDays === 1 ? '1 day to go...' : diffDays + ' days to go...'
     }

@@ -37,6 +37,14 @@ export default function Home() {
             })
     }, [])
 
+    console.log(
+        matches.sort(function (a, b) {
+            var c = new Date(a.time)
+            var d = new Date(b.time)
+            return c - d
+        }),
+    )
+
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
     return (
@@ -106,11 +114,9 @@ export default function Home() {
                                                     match.boxer_1_record
                                                 }
                                                 boxerHeadshot={
-                                                    server +
                                                     match.boxer_1_headshot
                                                 }
                                                 boxerFlag={
-                                                    server +
                                                     match.boxer_1_flag_img
                                                 }
                                                 boxerFlagAlt={
@@ -126,11 +132,9 @@ export default function Home() {
                                                     match.boxer_2_record
                                                 }
                                                 boxerHeadshot={
-                                                    server +
                                                     match.boxer_2_headshot
                                                 }
                                                 boxerFlag={
-                                                    server +
                                                     match.boxer_2_flag_img
                                                 }
                                                 boxerFlagAlt={

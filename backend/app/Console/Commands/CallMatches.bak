@@ -8,7 +8,10 @@ use App\Models\BoxingMatch;
 use Illuminate\Console\Command;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpClient\HttpClient;
+
+require 'vendor/autoload.php';
 
 class CallMatches extends Command
 {
@@ -46,16 +49,6 @@ class CallMatches extends Command
         $goutte = new Client();
         $crawler = $goutte->request('GET', 'https://box.live/upcoming-fights-schedule/');
 
-        // $client = new Client(HttpClient::create(['timeout' => 60]));
-        // $news = $crawler->filter('.fight-card__footer > a')->text();
-        // $link = $crawler->selectLink($news)->link();
-        // $crawler = $client->click($link);
-        // $place = $crawler->filter('.fight-place')->text();
-        // $full_weight_title = $crawler->filter('.single-fight__weight-class > span')->text();
-        // $weight_class = $crawler->filter('.single-fight__weight-class > span > span:last-of-type')->text();
-
-
-
         $data = $crawler->filter('.fight-card')->each(function ($fightCard) {
             $title = $fightCard->filter('.fighters-names .fighters-names__item')->each(function ($name) {
 
@@ -72,15 +65,26 @@ class CallMatches extends Command
             });
 
             // HEADSHOTS
-            $headshots = $fightCard->filter('.fight-card__fighters .fight-card__photo')->each(function ($headshot) {
+            $headshots = $fightCard->filter('.fight-card__fighters .fight-card__photo')->each(function ($headshot, $key) use ($names) {
                 if ($headshot->filter('img')->count() > 0) {
-                    return $headshot->filter('img')->attr('data-src');
+                    // return $headshot->filter('img')->attr('data-src');
+
+                    $url = $headshot->filter('img')->attr('data-src');
+                    $contents = file_get_contents($url);
+                    $file_extension = substr($url, strrpos($url, '.') + 1);
+                    $name = str_replace(' ', '_', $names[$key]) . '.' . $file_extension;
+                    Storage::get('/public/headshots/' . $name) ?? Storage::put('/public/headshots/' . $name, $contents);
                 }
             });
 
             // FLAGS
             $flags = $fightCard->filter('.fight-card__flag')->each(function ($flag) {
                 if ($flag->filter('img')->count() > 0) {
+                    $url = $flag->filter('img')->attr('data-src');
+                    $contents = file_get_contents($url);
+                    $name = substr($url, strrpos($url, '/') + 1);
+                    Storage::get('/public/flags/' . $name) ?? Storage::put('/public/flags/' . $name, $contents);
+
                     return [
                         'img' => $flag->filter('img')->attr('data-src'),
                         'alt' => $flag->filter('img')->attr('alt') ? $flag->filter('img')->attr('alt') : 'flag'
@@ -147,7 +151,7 @@ class CallMatches extends Command
             return [
                 'names' => $names,
                 'surnames' => [$title[0], $title[1]],
-                'headshots' => $headshots,
+                // 'headshots' => $headshots,
                 'flags' => $flags,
                 'records' => $records,
                 'match_data' => [
@@ -173,18 +177,43 @@ class CallMatches extends Command
 
         foreach ($data as $d) {
             // $d[0][0], $d[0][1]
+
+            $b1_name = $d['names'][0];
+            $b1_name_formatted = str_replace(' ', '_', $b1_name);
+            $b1_flag = $d['flags'][0]['img'];
+            $b1_flag_formatted = substr($b1_flag, strrpos($b1_flag, '/') + 1);
+
+            $b2_name = $d['names'][1];
+            $b2_name_formatted = str_replace(' ', '_', $b2_name);
+            $b2_flag = $d['flags'][1]['img'];
+            $b2_flag_formatted = substr($b2_flag, strrpos($b2_flag, '/') + 1);
+
+
             $boxer_data1 = [0 => [
-                'name' => $d['names'][0],
+                'name' => $b1_name,
                 'surname' => $d['surnames'][0],
-                'headshot' => $d['headshots'][0],
-                'flag' => $d['flags'][0],
+                // 'headshot' => $d['headshots'][0],
+
+                'headshot' => str_contains(Storage::url('public/headshots/' . $b1_name_formatted . '.png'), $b1_name_formatted) ? Storage::url('public/headshots/' . $b1_name_formatted . '.png') : null,
+
+                'flag' => [
+                    str_contains(Storage::url('public/flags/' . $b1_flag_formatted), $b1_flag_formatted) ? Storage::url('public/flags/' . $b1_flag_formatted) : null,
+                    $d['flags'][0]['alt'],
+                ],
+
                 'record' => $d['records'][0]
             ]];
             $boxer_data2 = [1 => [
-                'name' => $d['names'][1],
+                'name' => $b2_name,
                 'surname' => $d['surnames'][1],
-                'headshot' => $d['headshots'][1],
-                'flag' => $d['flags'][1],
+
+                'headshot' => str_contains(Storage::url('public/headshots/' . $b2_name_formatted . '.png'), $b2_name_formatted) ? Storage::url('public/headshots/' . $b2_name_formatted . '.png') : null,
+
+                'flag' => [
+                    str_contains(Storage::url('public/flags/' . $b2_flag_formatted), $b2_flag_formatted) ? Storage::url('public/flags/' . $b2_flag_formatted) : null,
+                    $d['flags'][1]['alt'],
+                ],
+
                 'record' => $d['records'][1]
             ]];
             $boxer_data = array_merge($boxer_data1, $boxer_data2);
@@ -209,16 +238,16 @@ class CallMatches extends Command
                 $BoxingMatch->boxer_1_name = $m['boxers'][0]['name'] ?? null;
                 $BoxingMatch->boxer_1_surname = $m['boxers'][0]['surname'] ?? null;
                 $BoxingMatch->boxer_1_headshot = $m['boxers'][0]['headshot'] ?? null;
-                $BoxingMatch->boxer_1_flag_img = $m['boxers'][0]['flag']['img'] ?? null;
-                $BoxingMatch->boxer_1_flag_alt = $m['boxers'][0]['flag']['alt'] ?? null;
+                $BoxingMatch->boxer_1_flag_img = $m['boxers'][0]['flag'][0] ?? null;
+                $BoxingMatch->boxer_1_flag_alt = $m['boxers'][0]['flag'][1] ?? null;
                 $BoxingMatch->boxer_1_record = $m['boxers'][0]['record'] ?? null;
 
                 // BOXER 2
                 $BoxingMatch->boxer_2_name = $m['boxers'][1]['name'] ?? null;
                 $BoxingMatch->boxer_2_surname = $m['boxers'][1]['surname'] ?? null;
                 $BoxingMatch->boxer_2_headshot = $m['boxers'][1]['headshot'] ?? null;
-                $BoxingMatch->boxer_2_flag_img = $m['boxers'][1]['flag']['img'] ?? null;
-                $BoxingMatch->boxer_2_flag_alt = $m['boxers'][1]['flag']['alt'] ?? null;
+                $BoxingMatch->boxer_2_flag_img = $m['boxers'][1]['flag'][0] ?? null;
+                $BoxingMatch->boxer_2_flag_alt = $m['boxers'][1]['flag'][1] ?? null;
                 $BoxingMatch->boxer_2_record = $m['boxers'][1]['record'] ?? null;
 
                 // BOXING MATCH DATA
@@ -242,16 +271,16 @@ class CallMatches extends Command
                 $BoxingMatch->boxer_1_name = $m['boxers'][0]['name'] ?? null;
                 $BoxingMatch->boxer_1_surname = $m['boxers'][0]['surname'] ?? null;
                 $BoxingMatch->boxer_1_headshot = $m['boxers'][0]['headshot'] ?? null;
-                $BoxingMatch->boxer_1_flag_img = $m['boxers'][0]['flag']['img'] ?? null;
-                $BoxingMatch->boxer_1_flag_alt = $m['boxers'][0]['flag']['alt'] ?? null;
+                $BoxingMatch->boxer_1_flag_img = $m['boxers'][0]['flag'][0] ?? null;
+                $BoxingMatch->boxer_1_flag_alt = $m['boxers'][0]['flag'][1] ?? null;
                 $BoxingMatch->boxer_1_record = $m['boxers'][0]['record'] ?? null;
 
                 // BOXER 2
                 $BoxingMatch->boxer_2_name = $m['boxers'][1]['name'] ?? null;
                 $BoxingMatch->boxer_2_surname = $m['boxers'][1]['surname'] ?? null;
                 $BoxingMatch->boxer_2_headshot = $m['boxers'][1]['headshot'] ?? null;
-                $BoxingMatch->boxer_2_flag_img = $m['boxers'][1]['flag']['img'] ?? null;
-                $BoxingMatch->boxer_2_flag_alt = $m['boxers'][1]['flag']['alt'] ?? null;
+                $BoxingMatch->boxer_2_flag_img = $m['boxers'][1]['flag'][0] ?? null;
+                $BoxingMatch->boxer_2_flag_alt = $m['boxers'][1]['flag'][1] ?? null;
                 $BoxingMatch->boxer_2_record = $m['boxers'][1]['record'] ?? null;
 
                 // BOXING MATCH DATA
@@ -259,12 +288,6 @@ class CallMatches extends Command
                 $BoxingMatch->time = $m['match_data']['time'] ?? null;
                 $BoxingMatch->timezone = $m['match_data']['timezone'] ?? null;
                 $BoxingMatch->organisations_title = $m['match_data']['organisations']['title'] ?? null;
-                // $BoxingMatch->organisations_list = json_encode($m['match_data']['organisations']['organisations']) ?? null;
-                // $BoxingMatch->tv_title = json_encode($m['match_data']['tv']['title']);
-                // $BoxingMatch->tv_img = json_encode($m['match_data']['tv']['img']);
-                // $BoxingMatch->venue = $m['match_data']['venue'] ?? null;
-                // $BoxingMatch->full_weight_title = $m['match_data']['full_weight_title'] ?? null;
-                // $BoxingMatch->weight_class = $m['match_data']['weight_class'] ?? null;
                 $BoxingMatch->update(['organisations_list' => $m['match_data']['organisations']['organisations']]) ?? null;
                 $BoxingMatch->update(['tv_title' => $m['match_data']['tv']['title']]) ?? null;
                 $BoxingMatch->update(['tv_img' => $m['match_data']['tv']['img']]) ?? null;
