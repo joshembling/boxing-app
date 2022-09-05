@@ -21,7 +21,6 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 6rem;
         justify-content: space-between;
     }
 
@@ -30,7 +29,7 @@
         flex-direction: row;
         align-items: center;
         gap: 0.5rem;
-        padding: 1rem 0.75rem;
+        padding: 1rem 0.75rem 0;
 
         img {
             height: 1rem;

@@ -224,9 +224,15 @@ table {
 }
 
 .prev-matches {
-    margin-bottom: 3.5rem;
-    @media (max-width: 575px) {
-        margin-bottom: 3rem;
+    &:not(:last-of-type) {
+        margin-bottom: 3.5rem;
+        @media (max-width: 575px) {
+            margin-bottom: 3rem;
+        }
+    }
+
+    &:last-of-type {
+        margin-bottom: 1.25rem;
     }
 
     h2 {

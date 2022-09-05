@@ -98,9 +98,9 @@ const Match = ({ match }) => {
                 <table>
                     <thead>
                         <tr>
-                            <td>{match.boxer_1_surname}</td>
+                            <td>{match.boxer_1.surname}</td>
                             <td>Round</td>
-                            <td>{match.boxer_2_surname}</td>
+                            <td>{match.boxer_2.surname}</td>
                         </tr>
                     </thead>
                     <tbody>

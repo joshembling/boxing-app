@@ -104,39 +104,39 @@ export default function Home() {
                                                 match.full_weight_title
                                             }>
                                             <Boxer
-                                                boxerName={match.boxer_1_name}
+                                                boxerName={match.boxer_1.name}
                                                 boxerSurname={
-                                                    match.boxer_1_surname
+                                                    match.boxer_1.surname
                                                 }
                                                 boxerRecord={
-                                                    match.boxer_1_record
+                                                    match.boxer_1.record
                                                 }
                                                 boxerHeadshot={
-                                                    match.boxer_1_headshot
+                                                    match.boxer_1.headshot
                                                 }
                                                 boxerFlag={
-                                                    match.boxer_1_flag_img
+                                                    match.boxer_1.flag.img
                                                 }
                                                 boxerFlagAlt={
-                                                    match.boxer_1_flag_alt
+                                                    match.boxer_1.flag.alt
                                                 }
                                             />
                                             <Boxer
-                                                boxerName={match.boxer_2_name}
+                                                boxerName={match.boxer_2.name}
                                                 boxerSurname={
-                                                    match.boxer_2_surname
+                                                    match.boxer_2.surname
                                                 }
                                                 boxerRecord={
-                                                    match.boxer_2_record
+                                                    match.boxer_2.record
                                                 }
                                                 boxerHeadshot={
-                                                    match.boxer_2_headshot
+                                                    match.boxer_2.headshot
                                                 }
                                                 boxerFlag={
-                                                    match.boxer_2_flag_img
+                                                    match.boxer_2.flag.img
                                                 }
                                                 boxerFlagAlt={
-                                                    match.boxer_2_flag_alt
+                                                    match.boxer_2.flag.alt
                                                 }
                                             />
                                         </Card>

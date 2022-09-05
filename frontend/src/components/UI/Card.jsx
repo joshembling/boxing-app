@@ -87,7 +87,12 @@ const Card = ({
             </div>
 
             <Button
-                link={`/matches/${slug}`}
+                link={
+                    getMatchDate.setHours(0, 0, 0, 0) >=
+                    tomorrow.setHours(0, 0, 0, 0)
+                        ? '/'
+                        : `/matches/${slug}`
+                }
                 isDisabled={
                     getMatchDate.setHours(0, 0, 0, 0) >=
                     tomorrow.setHours(0, 0, 0, 0)

@@ -16,12 +16,15 @@ return new class extends Migration
         Schema::create('boxing_matches', function (Blueprint $table) {
             $table->id();
             $table->string('match_title', 255)->nullable();
+            $table->string('slug', 255)->nullable();
             $table->string('boxer_1_name', 255)->nullable();
+            $table->string('boxer_1_surname', 255)->nullable();
             $table->string('boxer_1_headshot', 1000)->nullable();
             $table->string('boxer_1_flag_img', 1000)->nullable();
             $table->string('boxer_1_flag_alt')->nullable();
             $table->string('boxer_1_record')->nullable();
             $table->string('boxer_2_name')->nullable();
+            $table->string('boxer_2_surname')->nullable();
             $table->string('boxer_2_headshot', 1000)->nullable();
             $table->string('boxer_2_flag_img', 1000)->nullable();
             $table->string('boxer_2_flag_alt')->nullable();
@@ -33,6 +36,9 @@ return new class extends Migration
             $table->json('organisations_list')->nullable();
             $table->json('tv_title')->nullable();
             $table->json('tv_img')->nullable();
+            $table->string('venue', 500)->nullable();
+            $table->string('full_weight_title', 255)->nullable();
+            $table->string('weight_class', 255)->nullable();
             $table->timestamps();
         });
     }
