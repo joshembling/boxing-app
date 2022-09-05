@@ -86,6 +86,44 @@ class BoxingMatchController extends Controller
     public function show($slug)
     {
         // print_r($slug);
-        return BoxingMatch::where('slug', '=', $slug)->first();
+        $match = BoxingMatch::where('slug', '=', $slug)->first();
+
+        $json = [
+            'id' => $match->id,
+            'match_title' => $match->match_title,
+            'slug' => $match->slug,
+            'boxer_1' => [
+                'name' => $match->boxer_1_name,
+                'surname' => $match->boxer_1_surname,
+                'headshot' => $match->boxer_1_headshot,
+                'flag' => [
+                    'img' => $match->boxer_1_flag_img,
+                    'alt' => $match->boxer_1_flag_alt
+                ],
+                'record' => $match->boxer_1_record,
+            ],
+            'boxer_2' => [
+                'name' => $match->boxer_2_name,
+                'surname' => $match->boxer_2_surname,
+                'headshot' => $match->boxer_2_headshot,
+                'flag' => [
+                    'img' => $match->boxer_2_flag_img,
+                    'alt' => $match->boxer_2_flag_alt
+                ],
+                'record' => $match->boxer_2_record,
+            ],
+            'date' => $match->date,
+            'time' => $match->time,
+            'timezone' => $match->timezone,
+            'organisations_title' => $match->organisations_title,
+            'organisations_list' => $match->organisations_list,
+            'tv_title' => $match->tv_title,
+            'tv_img' => $match->tv_img,
+            'venue' => $match->venue,
+            'full_weight_title' => $match->full_weight_title,
+            'weight_class' => $match->weight_class,
+        ];
+
+        return $json;
     }
 }
