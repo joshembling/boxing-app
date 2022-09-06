@@ -6,8 +6,10 @@ import Card from 'components/UI/Card'
 import Spinner from 'components/UI/Spinner'
 
 import { AiOutlineFundView } from 'react-icons/ai'
+import { BiPencil } from 'react-icons/bi'
 import { BiShareAlt } from 'react-icons/bi'
 import { GiBoxingGlove } from 'react-icons/gi'
+import { GrScorecard } from 'react-icons/gr'
 
 import { useState, useEffect } from 'react'
 
@@ -58,13 +60,17 @@ export default function Home() {
                             <GiBoxingGlove /> Score the biggest boxing matches
                             as you watch them.
                         </li>
-                        <li>
+                        {/* <li>
                             <BiShareAlt /> Share your results on your favourite
                             social platforms.
-                        </li>
+                        </li> */}
                         <li>
                             <AiOutlineFundView /> View all matches you have
                             scored previously.
+                        </li>
+                        <li>
+                            <BiPencil /> Score matches up to 36 hours after the
+                            event has taken place.
                         </li>
                     </ul>
                 </div>
@@ -77,10 +83,12 @@ export default function Home() {
                     {matches.map(match => {
                         const getMatchDate = new Date(match.time)
 
+                        console.log(match)
+
                         return (
                             <div key={match.id}>
                                 {getMatchDate.setHours(0, 0, 0, 0) >
-                                    yesterday.setHours(0, 0, 0, 0) && (
+                                    yesterday.setHours(0, 0, 0, 0) - 1 && (
                                     <div className="match">
                                         <Card
                                             key={match.id}
