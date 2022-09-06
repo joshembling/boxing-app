@@ -69,7 +69,7 @@ export default function Home() {
                             scored previously.
                         </li>
                         <li>
-                            <BiPencil /> Score matches up to 36 hours after the
+                            <BiPencil /> Score matches up to 48 hours after the
                             event has taken place.
                         </li>
                     </ul>
